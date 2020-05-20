@@ -7,9 +7,20 @@ class TodoList extends Component {
   state = {
     todos: [],
   };
+  componentDidMount = () => {
+    localStorage.getItem("todos");
+  };
+  saveTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  };
   addTodos = (todo) => {
     const task = { ...todo, complete: false };
-    this.setState({ todos: [...this.state.todos, task] });
+    this.setState({ todos: [...this.state.todos, task] }, this.saveTodos);
+  };
+  putElement = (id, element) => {
+    const arr = [...this.state.todos];
+    arr[id] = element;
+    this.setState({ todos: arr }, this.saveTodos);
   };
   toggleComplete = (id) => {
     /*1) Дістати потрібний елемент за індексом
@@ -18,14 +29,16 @@ class TodoList extends Component {
       4) вставити масив в стейт */
     const element = this.state.todos[id];
     element.complete = !element.complete;
-    const arr = [...this.state.todos];
-    arr[id] = element;
-    this.setState({ todos: arr });
+    this.putElement(id, element);
+  };
+  editTask = (task, index) => {
+    const element = this.state.todos[index];
+    const todo = { ...element, ...task };
+    this.putElement(index, todo);
   };
   deleteTask = (id) => {
     let arr = [...this.state.todos];
     arr.splice(id, 1);
-    console.log(arr);
     this.setState({ todos: arr });
   };
   render() {
@@ -40,6 +53,7 @@ class TodoList extends Component {
               id={index}
               toggleComplete={() => this.toggleComplete(index)}
               deleteTask={() => this.deleteTask(index)}
+              editTask={(task) => this.editTask(task, index)}
               value={todo}
             />
           ))}

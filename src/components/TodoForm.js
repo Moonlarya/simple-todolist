@@ -9,8 +9,12 @@ class TodoForm extends Component {
   };
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.addTodos({ task: this.state.task });
-    this.setState({ task: "" });
+    if (this.state.task) {
+      this.props.addTodos({ task: this.state.task });
+      this.setState({ task: "" });
+    } else {
+      console.error("Your input is empty");
+    }
   };
   render() {
     const { task } = this.state;
