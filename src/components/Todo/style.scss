@@ -1,0 +1,41 @@
+
+.todo{
+  width: 100%;
+  padding: 0;
+  & *{
+    transition: .15s ease-in;
+    box-sizing: border-box;
+  } 
+  .text{
+    color: #333;  
+    padding: 2% 5%;   
+    &:hover{
+      background-color: #ddeffc;
+    }
+    &.complete{
+      color:rgb(81, 146, 19);
+    }  
+  }
+  .control{
+    padding: 7px;
+  }
+  li{
+    list-style: none;
+    line-height: 2em;
+    cursor: pointer;
+  }
+  .delete_btn{
+    border:1px solid rgb(88, 185, 218);
+    padding: 3px 7px;
+    margin-left: 10%;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: rgb(88, 185, 218);
+    color: #fafafa;
+    border: 1px solid rgb(113, 197, 224);
+    border-radius: 5px;
+    &:hover{
+      background-color: rgb(159, 218, 238);
+    }
+  }
+}
