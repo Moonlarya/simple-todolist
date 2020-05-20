@@ -8,8 +8,9 @@ class TodoList extends Component {
     todos: [],
   };
   componentDidMount = () => {
-    const items = JSON.parse(localStorage.getItem("todos"));
+    const items = JSON.parse(localStorage.getItem("todos")) || [];
     this.setState({ todos: items });
+    
   };
   saveTodos = () => {
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
