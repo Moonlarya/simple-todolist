@@ -5,12 +5,7 @@ import "./style/style.css";
 
 class TodoList extends Component {
   state = {
-    todos: [],
-  };
-  componentDidMount = () => {
-    const items = JSON.parse(localStorage.getItem("todos")) || [];
-    this.setState({ todos: items });
-    
+    todos: JSON.parse(localStorage.getItem("todos")) || [],
   };
   saveTodos = () => {
     localStorage.setItem("todos", JSON.stringify(this.state.todos));
